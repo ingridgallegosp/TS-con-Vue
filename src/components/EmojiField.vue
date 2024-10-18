@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import UseEmojis from "../composables/UseEmoji.ts";
+import UseEmojis from "../composables/UseEmoji";
 const { emojis } = UseEmojis();
 defineProps(["modelValue"]);
 defineEmits(["update:modelValue"]);

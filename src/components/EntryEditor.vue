@@ -4,13 +4,12 @@ import type Emoji from "../types/Emoji";
 import { ref, computed} from "vue";
 
 const props = defineProps<{
-    user: {
+    user?: {
         username: string;
         required:true
     }
 }>();
 
-const maxChars = 280;
 
 //Typing refs
 const text= ref("") // type inferred
@@ -21,19 +20,29 @@ const emoji = ref<Emoji | null>(null);// Reactive reference with a valid Emoji o
 //Typing computed
 const charCount = computed(() => text.value.length);
 
-//Typing events
-const handleTextInput=(e:Event)=>{
-    const textarea = e.target
-    console.log(textarea)
-}
+const maxChars = 280;
+
+//Typing Events
+const handleTextInput = (e: Event) =>{
+    const textarea = e.target as HTMLTextAreaElement; // cuadno va a obtener el valor del area de texto
+    //console.log(textarea.value);
+    if(textarea.value.length <= maxChars){
+        text.value = textarea.value
+    } else{
+        text.value = textarea.value = textarea.value.substring(0,maxChars)
+
+    }
+
+} ;
+
 
 </script>
 <template>
-    <form class="entry-form" @submit.prevent="handleSubmit">
+    <form class="entry-form" @submit.prevent="$emit('create', {text,emoji})">
     <textarea
         :value="text"
         @keyup="handleTextInput"
-        :placeholder="`New Journal Entry for ${props.user.username || 'anonymous'}`"
+        :placeholder="`New Journal Entry for @daniellKelly`"
     ></textarea>
         <EmojiField v-model="emoji" />
         <div class="entry-form-footer">

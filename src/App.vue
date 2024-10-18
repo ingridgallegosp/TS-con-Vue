@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import type Ref from 'vue'
+import { reactive, ref , Ref} from 'vue';
 import type User from './types/User.ts';
 import type Emoji from './types/Emoji.ts';
 import TheHeader from '../src/components/TheHeader.vue';
@@ -38,7 +37,8 @@ const text = ref(""); // type inferred
 <template>
     <main class="container m-auto p-10">
         <TheHeader />
-        <EntryEditor :user="user"/>
+        <EntryEditor/>
+        <EmojiField />
     </main>
 </template>
 

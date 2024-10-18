@@ -2,7 +2,7 @@ import type { Component } from "vue";
 import { reactive } from "vue";
 
 const files: { [key: string]: unknown } = import.meta.glob(
-"../assets/icons/emojis/*.svg",
+"../assets/icons/emojis/*.svg", 
 { eager: true },
 );
 
